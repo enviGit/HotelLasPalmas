@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Gosc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imie" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Nazwisko" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Kraj" Type="varchar" MaxLength="60" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Pobyt">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RezerwacjaID" Type="int" Nullable="false" />
+          <Property Name="GoscID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pokoj">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumerPietra" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="NumerPokoju" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="Iluosobowy" Type="char" MaxLength="1" />
+          <Property Name="Koszt" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rezerwacja">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataZameldowania" Type="date" Nullable="false" />
+          <Property Name="DataWymeldowania" Type="date" Nullable="false" />
+          <Property Name="PokojID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK">
+          <End Role="Pokoj" Type="Self.Pokoj" Multiplicity="1" />
+          <End Role="Rezerwacja" Type="Self.Rezerwacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokoj">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rezerwacja">
+              <PropertyRef Name="PokojID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK1">
+          <End Role="Rezerwacja" Type="Self.Rezerwacja" Multiplicity="1" />
+          <End Role="Pobyt" Type="Self.Pobyt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rezerwacja">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pobyt">
+              <PropertyRef Name="RezerwacjaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK2">
+          <End Role="Gosc" Type="Self.Gosc" Multiplicity="1" />
+          <End Role="Pobyt" Type="Self.Pobyt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gosc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pobyt">
+              <PropertyRef Name="GoscID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelModelStoreContainer">
+          <EntitySet Name="Gosc" EntityType="Self.Gosc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pobyt" EntityType="Self.Pobyt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pokoj" EntityType="Self.Pokoj" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rezerwacja" EntityType="Self.Rezerwacja" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK" Association="Self.FK">
+            <End Role="Pokoj" EntitySet="Pokoj" />
+            <End Role="Rezerwacja" EntitySet="Rezerwacja" />
+          </AssociationSet>
+          <AssociationSet Name="FK1" Association="Self.FK1">
+            <End Role="Rezerwacja" EntitySet="Rezerwacja" />
+            <End Role="Pobyt" EntitySet="Pobyt" />
+          </AssociationSet>
+          <AssociationSet Name="FK2" Association="Self.FK2">
+            <End Role="Gosc" EntitySet="Gosc" />
+            <End Role="Pobyt" EntitySet="Pobyt" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Gosc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imie" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nazwisko" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Kraj" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pobyt" Relationship="Self.FK2" FromRole="Gosc" ToRole="Pobyt" />
+        </EntityType>
+        <EntityType Name="Pobyt">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RezerwacjaID" Type="Int32" Nullable="false" />
+          <Property Name="GoscID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Gosc" Relationship="Self.FK2" FromRole="Pobyt" ToRole="Gosc" />
+          <NavigationProperty Name="Rezerwacja" Relationship="Self.FK1" FromRole="Pobyt" ToRole="Rezerwacja" />
+        </EntityType>
+        <EntityType Name="Pokoj">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumerPietra" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NumerPokoju" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Iluosobowy" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Koszt" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Rezerwacja" Relationship="Self.FK" FromRole="Pokoj" ToRole="Rezerwacja" />
+        </EntityType>
+        <EntityType Name="Rezerwacja">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DataZameldowania" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataWymeldowania" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PokojID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pobyt" Relationship="Self.FK1" FromRole="Rezerwacja" ToRole="Pobyt" />
+          <NavigationProperty Name="Pokoj" Relationship="Self.FK" FromRole="Rezerwacja" ToRole="Pokoj" />
+        </EntityType>
+        <Association Name="FK2">
+          <End Role="Gosc" Type="Self.Gosc" Multiplicity="1" />
+          <End Role="Pobyt" Type="Self.Pobyt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gosc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pobyt">
+              <PropertyRef Name="GoscID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK1">
+          <End Role="Rezerwacja" Type="Self.Rezerwacja" Multiplicity="1" />
+          <End Role="Pobyt" Type="Self.Pobyt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rezerwacja">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pobyt">
+              <PropertyRef Name="RezerwacjaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK">
+          <End Role="Pokoj" Type="Self.Pokoj" Multiplicity="1" />
+          <End Role="Rezerwacja" Type="Self.Rezerwacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokoj">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rezerwacja">
+              <PropertyRef Name="PokojID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Gosc" EntityType="Self.Gosc" />
+          <EntitySet Name="Pobyt" EntityType="Self.Pobyt" />
+          <EntitySet Name="Pokoj" EntityType="Self.Pokoj" />
+          <EntitySet Name="Rezerwacja" EntityType="Self.Rezerwacja" />
+          <AssociationSet Name="FK2" Association="Self.FK2">
+            <End Role="Gosc" EntitySet="Gosc" />
+            <End Role="Pobyt" EntitySet="Pobyt" />
+          </AssociationSet>
+          <AssociationSet Name="FK1" Association="Self.FK1">
+            <End Role="Rezerwacja" EntitySet="Rezerwacja" />
+            <End Role="Pobyt" EntitySet="Pobyt" />
+          </AssociationSet>
+          <AssociationSet Name="FK" Association="Self.FK">
+            <End Role="Pokoj" EntitySet="Pokoj" />
+            <End Role="Rezerwacja" EntitySet="Rezerwacja" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HotelModelStoreContainer" CdmEntityContainer="HotelEntities">
+          <EntitySetMapping Name="Gosc">
+            <EntityTypeMapping TypeName="HotelModel.Gosc">
+              <MappingFragment StoreEntitySet="Gosc">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Kraj" ColumnName="Kraj" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pobyt">
+            <EntityTypeMapping TypeName="HotelModel.Pobyt">
+              <MappingFragment StoreEntitySet="Pobyt">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RezerwacjaID" ColumnName="RezerwacjaID" />
+                <ScalarProperty Name="GoscID" ColumnName="GoscID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pokoj">
+            <EntityTypeMapping TypeName="HotelModel.Pokoj">
+              <MappingFragment StoreEntitySet="Pokoj">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NumerPietra" ColumnName="NumerPietra" />
+                <ScalarProperty Name="NumerPokoju" ColumnName="NumerPokoju" />
+                <ScalarProperty Name="Iluosobowy" ColumnName="Iluosobowy" />
+                <ScalarProperty Name="Koszt" ColumnName="Koszt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rezerwacja">
+            <EntityTypeMapping TypeName="HotelModel.Rezerwacja">
+              <MappingFragment StoreEntitySet="Rezerwacja">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DataZameldowania" ColumnName="DataZameldowania" />
+                <ScalarProperty Name="DataWymeldowania" ColumnName="DataWymeldowania" />
+                <ScalarProperty Name="PokojID" ColumnName="PokojID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

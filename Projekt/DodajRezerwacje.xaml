@@ -1,0 +1,19 @@
+﻿<Window x:Class="Projekt.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projekt"
+        mc:Ignorable="d"
+        Icon="/Zasoby/ikona.ico"
+        Title="Hotel Las Palmas" Height="550" Width="900" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Viewbox Stretch="Fill">
+            <Grid Height="534.04" Width="900" Margin="5,5,5,5">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Zasoby/tlo.jpg" Stretch="UniformToFill"/>
+                </Grid.Background>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</Window>
