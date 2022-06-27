@@ -80,8 +80,8 @@
                 <Label Content="Email" Margin="521,226,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="16"/>
                 <Label Content="Zameldowanie" Margin="149,315,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="16"/>
                 <Label Content="Wymeldowanie" Margin="292,315,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="16"/>
-                <Button x:Name="rezerwuj" Content="Zarezerwuj" Margin="271,424,0,0" Height="50" Width="125" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Normal" FontSize="16"/>
-                <Button Content="Anuluj" Margin="488,424,0,0" Height="50" Width="125" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" FontWeight="Normal"/>
+                <Button x:Name="rezerwuj" Content="Zarezerwuj" Margin="271,424,0,0" Height="50" Width="125" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Normal" FontSize="16" Click="Button_Click_1"/>
+                <Button Content="Anuluj" Margin="488,424,0,0" Height="50" Width="125" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" FontWeight="Normal" Click="Button_Click"/>
                 <Button Content="Wolne pokoje" Margin="620,36,0,0" Height="40" Width="175" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" FontWeight="Normal"/>
             </Grid>
         </Viewbox>
