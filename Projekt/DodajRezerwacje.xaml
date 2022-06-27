@@ -13,6 +13,76 @@
                 <Grid.Background>
                     <ImageBrush ImageSource="/Zasoby/tlo.jpg" Stretch="UniformToFill"/>
                 </Grid.Background>
+                <Label Content="Dokonaj Rezerwacji" FontSize="30" FontWeight="Bold" Height="60" Margin="99,25,513,449">
+                    <Label.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF7B3473" Offset="0.883"/>
+                            <GradientStop Color="#FFC896C8" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Label.Foreground>
+                </Label>
+                <DatePicker x:Name="Zameldowanie" Margin="157,346,0,0" FirstDayOfWeek="Monday" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="{x:Null}"/>
+                <DatePicker x:Name="Wymeldowanie" Margin="303,346,0,0" FirstDayOfWeek="Monday" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="{x:Null}"/>
+                <TextBox x:Name="Imie" Margin="223,127,0,0" TextWrapping="Wrap" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
+                <TextBox x:Name="Nazwisko" Margin="574,127,0,0" TextWrapping="Wrap" Width="166" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
+                <ComboBox x:Name="Kraj" SelectedValuePath="Content" Margin="470,347,0,0" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <ComboBoxItem Content="Arabia Saudyjska"/>
+                    <ComboBoxItem Content="Australia"/>
+                    <ComboBoxItem Content="Austria"/>
+                    <ComboBoxItem Content="Chiny"/>
+                    <ComboBoxItem Content="Chorwacja"/>
+                    <ComboBoxItem Content="Francja"/>
+                    <ComboBoxItem Content="Grecja"/>
+                    <ComboBoxItem Content="Hiszpania"/>
+                    <ComboBoxItem Content="Holandia"/>
+                    <ComboBoxItem Content="Hongkong"/>
+                    <ComboBoxItem Content="Indie"/>
+                    <ComboBoxItem Content="Japonia"/>
+                    <ComboBoxItem Content="Kanada"/>
+                    <ComboBoxItem Content="Korea Południowa"/>
+                    <ComboBoxItem Content="Korea Północna"/>
+                    <ComboBoxItem Content="Malezja"/>
+                    <ComboBoxItem Content="Meksyk"/>
+                    <ComboBoxItem Content="Niemcy"/>
+                    <ComboBoxItem Content="Polska"/>
+                    <ComboBoxItem Content="Portugalia"/>
+                    <ComboBoxItem Content="Rosja"/>
+                    <ComboBoxItem Content="Singapur"/>
+                    <ComboBoxItem Content="Stany Zjednoczone"/>
+                    <ComboBoxItem Content="Tajlandia"/>
+                    <ComboBoxItem Content="Turcja"/>
+                    <ComboBoxItem Content="Ukraina"/>
+                    <ComboBoxItem Content="Wielka Brytania"/>
+                    <ComboBoxItem Content="Węgry"/>
+                    <ComboBoxItem Content="Wietnam"/>
+                    <ComboBoxItem Content="Włochy"/>
+                    <ComboBoxItem Content="Zjednoczone Emiraty Arabskie"/>
+                </ComboBox>
+                <TextBox x:Name="Telefon" Margin="223,232,0,0" TextWrapping="Wrap" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
+                <TextBox x:Name="Email" Margin="574,232,0,0" TextWrapping="Wrap" Width="166" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
+                <ComboBox x:Name="Pokoj" SelectedValuePath="Content" Margin="642,347,0,0" Width="98" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <ComboBoxItem Content="001 - Parter"/>
+                    <ComboBoxItem Content="002 - Parter"/>
+                    <ComboBoxItem Content="101 - Piętro 1"/>
+                    <ComboBoxItem Content="102 - Piętro 1"/>
+                    <ComboBoxItem Content="103 - Piętro 1"/>
+                    <ComboBoxItem Content="104 - Piętro 1"/>
+                    <ComboBoxItem Content="201 - Piętro 2"/>
+                    <ComboBoxItem Content="202 - Piętro 2"/>
+                    <ComboBoxItem Content="203 - Piętro 2"/>
+                    <ComboBoxItem Content="204 - Piętro 2"/>
+                </ComboBox>
+                <Label Content="Imie" Margin="178,121,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="16"/>
+                <Label Content="Nazwisko" Margin="492,121,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="16"/>
+                <Label Content="Narodowość" Margin="481,313,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="16"/>
+                <Label Content="Telefon" Margin="157,226,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="16"/>
+                <Label Content="Pokój" VerticalAlignment="Top" Margin="666,313,0,0" HorizontalAlignment="Left" Foreground="White" FontSize="16"/>
+                <Label Content="Email" Margin="521,226,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="16"/>
+                <Label Content="Zameldowanie" Margin="149,315,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="16"/>
+                <Label Content="Wymeldowanie" Margin="292,315,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" FontSize="16"/>
+                <Button x:Name="rezerwuj" Content="Zarezerwuj" Margin="271,424,0,0" Height="50" Width="125" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Normal" FontSize="16"/>
+                <Button Content="Anuluj" Margin="488,424,0,0" Height="50" Width="125" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" FontWeight="Normal"/>
+                <Button Content="Wolne pokoje" Margin="620,36,0,0" Height="40" Width="175" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" FontWeight="Normal"/>
             </Grid>
         </Viewbox>
     </Grid>
