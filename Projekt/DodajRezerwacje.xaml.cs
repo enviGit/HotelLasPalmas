@@ -16,6 +16,26 @@ namespace Projekt
         public Window1()
         {
             InitializeComponent();
+
+            rezerwuj.IsEnabled = false;
+        }
+        private void ZmianaDanych(object sender, EventArgs e)
+        {
+            DateTime pierwszaData = new DateTime();
+            DateTime drugaData = new DateTime();
+            DateTime dzis = DateTime.Now.Date;
+
+            if (Zameldowanie.SelectedDate != null) pierwszaData = (DateTime)Zameldowanie.SelectedDate;
+            if (Wymeldowanie.SelectedDate != null) drugaData = (DateTime)Wymeldowanie.SelectedDate;
+
+            int iloscDob = (int)drugaData.Subtract(pierwszaData).TotalDays;
+            int _iloscDob = (int)dzis.Subtract(pierwszaData).TotalDays;
+
+            if (string.IsNullOrWhiteSpace(Imie.Text) || string.IsNullOrWhiteSpace(Nazwisko.Text) ||
+                string.IsNullOrWhiteSpace(Telefon.Text) || Zameldowanie.SelectedDate == null || Wymeldowanie.SelectedDate == null ||
+                Pokoj.SelectedItem == null || iloscDob <= 0 || _iloscDob > 0)
+                rezerwuj.IsEnabled = false;
+            else rezerwuj.IsEnabled = true;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -127,6 +147,10 @@ namespace Projekt
                 }
             }
         }
-
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            Application.Current.Shutdown();
+        }
     }
 }

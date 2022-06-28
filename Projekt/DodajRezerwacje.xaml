@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Icon="/Zasoby/ikona.ico"
         Title="Hotel Las Palmas" Height="550" Width="900" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="{DynamicResource mJasnyRoz}" Offset="0" />
+            <GradientStop Color="{DynamicResource jasnyRoz}" Offset="1" />
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <Viewbox Stretch="Fill">
             <Grid Height="534.04" Width="900" Margin="5,5,5,5">
@@ -21,10 +27,10 @@
                         </LinearGradientBrush>
                     </Label.Foreground>
                 </Label>
-                <DatePicker x:Name="Zameldowanie" Margin="157,346,0,0" FirstDayOfWeek="Monday" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="{x:Null}"/>
-                <DatePicker x:Name="Wymeldowanie" Margin="303,346,0,0" FirstDayOfWeek="Monday" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="{x:Null}"/>
-                <TextBox x:Name="Imie" Margin="223,127,0,0" TextWrapping="Wrap" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
-                <TextBox x:Name="Nazwisko" Margin="574,127,0,0" TextWrapping="Wrap" Width="166" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
+                <DatePicker x:Name="Zameldowanie" Margin="157,346,0,0" FirstDayOfWeek="Monday" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="{x:Null}" SelectedDateChanged="ZmianaDanych"/>
+                <DatePicker x:Name="Wymeldowanie" Margin="303,346,0,0" FirstDayOfWeek="Monday" VerticalAlignment="Top" HorizontalAlignment="Left" BorderBrush="{x:Null}" SelectedDateChanged="ZmianaDanych"/>
+                <TextBox x:Name="Imie" Margin="223,127,0,0" TextWrapping="Wrap" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White" TextChanged="ZmianaDanych"/>
+                <TextBox x:Name="Nazwisko" Margin="574,127,0,0" TextWrapping="Wrap" Width="166" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White" TextChanged="ZmianaDanych"/>
                 <ComboBox x:Name="Kraj" SelectedValuePath="Content" Margin="470,347,0,0" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left">
                     <ComboBoxItem Content="Arabia Saudyjska"/>
                     <ComboBoxItem Content="Australia"/>
@@ -58,9 +64,9 @@
                     <ComboBoxItem Content="Włochy"/>
                     <ComboBoxItem Content="Zjednoczone Emiraty Arabskie"/>
                 </ComboBox>
-                <TextBox x:Name="Telefon" Margin="223,232,0,0" TextWrapping="Wrap" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
+                <TextBox x:Name="Telefon" Margin="223,232,0,0" TextWrapping="Wrap" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White" TextChanged="ZmianaDanych"/>
                 <TextBox x:Name="Email" Margin="574,232,0,0" TextWrapping="Wrap" Width="166" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
-                <ComboBox x:Name="Pokoj" SelectedValuePath="Content" Margin="642,347,0,0" Width="98" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <ComboBox x:Name="Pokoj" SelectedValuePath="Content" Margin="642,347,0,0" Width="98" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedItem="zmiana_Danych" SelectionChanged="ZmianaDanych">
                     <ComboBoxItem Content="001 - Parter"/>
                     <ComboBoxItem Content="002 - Parter"/>
                     <ComboBoxItem Content="101 - Piętro 1"/>

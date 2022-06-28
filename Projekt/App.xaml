@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Projekt.Zasoby"
              StartupUri="WidokRezerwacji.xaml">
     <Application.Resources>
-        
+        <Color x:Key="mJasnyRoz">#FFCFBBF9</Color>
+        <Color x:Key="jasnyRoz">#FFF19BFF</Color>
     </Application.Resources>
 </Application>
