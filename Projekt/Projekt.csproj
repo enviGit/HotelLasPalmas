@@ -124,6 +124,8 @@
     <Compile Include="WidokRezerwacji.xaml.cs">
       <DependentUpon>WidokRezerwacji.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Zasoby\WidokPokoi.cs" />
+    <Compile Include="Zasoby\WidokRezerwacji.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

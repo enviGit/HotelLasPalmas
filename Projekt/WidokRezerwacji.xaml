@@ -7,13 +7,182 @@
         mc:Ignorable="d"
         Icon="/Zasoby/ikona.ico"
         Title="Hotel Las Palmas" Height="550" Width="900" WindowStartupLocation="CenterScreen">
-    <Viewbox Height="Auto" Stretch="Fill">
-        <Grid Height="531" Width="877">
-            <Grid x:Name="siatka">
-                <Grid.Background>
-                    <ImageBrush ImageSource="/Zasoby/tlo.jpg" Stretch="UniformToFill"/>
-                </Grid.Background>
-            </Grid>
-        </Grid>
-    </Viewbox>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="1,1" StartPoint="0,1.5" Opacity="0.6">
+            <GradientStop Color="{DynamicResource mJasnyRoz}" Offset="0" />
+            <GradientStop Color="{DynamicResource jasnyRoz}" Offset="1" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <TabControl x:Name="zakladka">
+        <TabItem x:Name="rezerwacje" Header="Rezerwacje">
+            <Viewbox Height="Auto" Stretch="Fill">
+                <Grid Height="531" Width="877">
+                    <Grid x:Name="siatka">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Zasoby/tlo.jpg" Stretch="UniformToFill"/>
+                        </Grid.Background>
+                        <DataGrid x:Name="tabelaGosci" RowHeaderWidth="0" ColumnWidth="Auto" ColumnHeaderHeight="30" Foreground="Black" Margin="135,79,135,167" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray" BorderThickness="3" BorderBrush="{x:Null}" HeadersVisibility="None" Width="606">
+                            <DataGrid.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                            </DataGrid.Resources>
+                            <DataGrid.Background>
+                                <SolidColorBrush Color="Transparent"></SolidColorBrush>
+                            </DataGrid.Background>
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    <Setter Property="Padding" Value="0, 0, 5, 0"/>
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="Black"/>
+                                                <GradientStop Color="#FFC179C1" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Foreground">
+                                        <Setter.Value>
+                                            <SolidColorBrush Color="White"></SolidColorBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="{x:Type DataGridRow}">
+                                    <Setter Property="Foreground" Value="White"></Setter>
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="PaleVioletRed"/>
+                                            <Setter Property="Foreground" Value="Black"/>
+                                        </Trigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsSelected" Value="True"/>
+                                                <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter Property="Background" Value="Purple" />
+                                            <Setter Property="Foreground" Value="White" />
+                                        </MultiTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
+                        <Label Content="Widok rezerwacji" FontSize="30" FontWeight="Bold" Margin="77,14,9,457">
+                            <Label.Foreground>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF7B3473" Offset="0.883"/>
+                                    <GradientStop Color="#FFC896C8" Offset="0"/>
+                                </LinearGradientBrush>
+                            </Label.Foreground>
+                        </Label>
+                        <Button Content="Dokonaj rezerwacji" Height="35" FontSize="16" Click="Button_Click" HorizontalContentAlignment="Center" Width="150" Margin="650,27,77,469"/>
+                        <Button x:Name="edytuj" Content="Edytuj dane" Width="150" Height="35" FontSize="16" Margin="438,459,289,37"/>
+                        <DatePicker x:Name="zameldowanie" FirstDayOfWeek="Monday" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="496,381,0,0" BorderBrush="{x:Null}" Height="26"/>
+                        <DatePicker x:Name="wymeldowanie" FirstDayOfWeek="Monday" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="496,414,0,0" BorderBrush="{x:Null}" Height="26"/>
+                        <TextBox x:Name="Imie" TextWrapping="Wrap" Width="165" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="179,383,0,0" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
+                        <TextBox x:Name="Nazwisko" TextWrapping="Wrap" Width="165" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="179,421,0,0" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
+                        <TextBox x:Name="Telefon" TextWrapping="Wrap" Width="165" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="179,458,0,0" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
+                        <ComboBox x:Name="nrPietra" SelectedValuePath="Content" Width="74" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="685,383,0,0">
+                            <ComboBoxItem Content="0"/>
+                            <ComboBoxItem Content="1"/>
+                            <ComboBoxItem Content="2"/>
+                        </ComboBox>
+                        <ComboBox x:Name="nrPokoju" Width="74" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="685,416,0,0"></ComboBox>
+                        <Label Content="Imie" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="138,378,0,0" FontSize="14"/>
+                        <Label Content="Nazwisko" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,417,0,0" FontSize="14"/>
+                        <Label Content="Telefon" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,455,0,0" FontSize="14"/>
+                        <Label Content="Piętro" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="638,378,0,0" FontSize="14"/>
+                        <Label x:Name="pokoj" Content="Pokój" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="641,413,0,0" FontSize="14"/>
+                        <Label Content="Zameldowanie" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="391,378,0,0" FontSize="14"/>
+                        <Label Content="Wymeldowanie" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,411,0,0" FontSize="14"/>
+                        <Button Content="Usuń rezerwację" Width="150" Height="35" FontSize="16" Margin="650,459,77,37"/>
+                    </Grid>
+                    <Button x:Name="wczytywanie" Content="Wczytaj rezerwacje" Height="35" FontSize="16" Click="Button_Click_1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="438,27,289,469" Width="150"/>
+                    <ProgressBar x:Name="ladowanie" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="292" Visibility="Hidden"/>
+                    <Label x:Name="stan" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Width="292" HorizontalContentAlignment="Center" Foreground="White"/>
+                </Grid>
+            </Viewbox>
+        </TabItem>
+        <TabItem x:Name="pokoje" Header="Pokoje">
+            <Viewbox Stretch="Fill">
+                <Grid Height="531" Width="877">
+                    <Grid x:Name="siatka2">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Zasoby/tlo.jpg" Stretch="UniformToFill"/>
+                        </Grid.Background>
+                        <Label Content="Wykaz wolnych pokoi" Width="Auto" FontSize="30" FontWeight="Bold" Height="60" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,10,0,0">
+                            <Label.Foreground>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF7B3473" Offset="0.883"/>
+                                    <GradientStop Color="#FFC896C8" Offset="0"/>
+                                </LinearGradientBrush>
+                            </Label.Foreground>
+                        </Label>
+                        <DataGrid x:Name="tabelaPokoi" RowHeaderWidth="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" ColumnWidth="Auto" ColumnHeaderHeight="30" Foreground="Black" FontSize="16" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray" BorderThickness="3" Margin="308,96,308,97" BorderBrush="{x:Null}" HeadersVisibility="None" Width="261">
+                            <DataGrid.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                            </DataGrid.Resources>
+                            <DataGrid.Background>
+                                <SolidColorBrush Color="Transparent"></SolidColorBrush>
+                            </DataGrid.Background>
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                                    <Setter Property="Padding" Value="0, 0, 5, 0"/>
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="Black"/>
+                                                <GradientStop Color="#FFC179C1" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Foreground">
+                                        <Setter.Value>
+                                            <SolidColorBrush Color="White"></SolidColorBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="{x:Type DataGridRow}">
+                                    <Setter Property="Foreground" Value="White"></Setter>
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="PaleVioletRed"/>
+                                            <Setter Property="Foreground" Value="Black"/>
+                                        </Trigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsSelected" Value="True"/>
+                                                <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter Property="Background" Value="Purple" />
+                                            <Setter Property="Foreground" Value="White" />
+                                        </MultiTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
+                        <Button Content="Dokonaj rezerwacji" FontSize="16" Click="Button_Click" Width="150" Margin="547,28,180,468" Height="35"/>
+                    </Grid>
+                    <Button x:Name="wczytywanie2" Content="Wczytaj wolne pokoje" FontSize="16" Click="Button_Click_4" Width="170" Margin="354,466,353,25" Height="40"/>
+                    <ProgressBar x:Name="ladowanie2" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="292" Visibility="Hidden"/>
+                    <Label x:Name="stan2" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Width="292" HorizontalContentAlignment="Center" Foreground="White"/>
+                </Grid>
+            </Viewbox>
+        </TabItem>
+    </TabControl>
 </Window>
