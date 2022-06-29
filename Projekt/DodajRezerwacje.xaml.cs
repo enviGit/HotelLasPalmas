@@ -147,6 +147,13 @@ namespace Projekt
                 }
             }
         }
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            MainWindow widokRezerwacji = new MainWindow();
+            widokRezerwacji.Show();
+            widokRezerwacji.zakladka.SelectedIndex = 1;
+            Hide();
+        }
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);

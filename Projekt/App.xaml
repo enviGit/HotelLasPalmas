@@ -4,7 +4,203 @@
              xmlns:local="clr-namespace:Projekt.Zasoby"
              StartupUri="WidokRezerwacji.xaml">
     <Application.Resources>
+        <local:KontrolerZakladek x:Key="kontrolerZakladek"/>
+
+        <Color x:Key="bialy">White</Color>
+        <Color x:Key="jasny">#FF7381F9</Color>
+        <Color x:Key="ciemny">#FF211AA9</Color>
         <Color x:Key="mJasnyRoz">#FFCFBBF9</Color>
         <Color x:Key="jasnyRoz">#FFF19BFF</Color>
+        <Color x:Key="mCiemnyRoz">#FFA11BFF</Color>
+        <Color x:Key="jasnaRamka">#FFCCCCCC</Color>
+        <Color x:Key="ciemnaRamka">#FF888888</Color>
+        <Color x:Key="wylaczony">#FFC5CBF9</Color>
+
+        <LinearGradientBrush x:Key="wypelnienieLadowania" StartPoint="0,0" EndPoint="1,0">
+            <LinearGradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#000000FF" Offset="0" />
+                    <GradientStop Color="#600000FF" Offset="0.4" />
+                    <GradientStop Color="#600000FF" Offset="0.6" />
+                    <GradientStop Color="#000000FF" Offset="1" />
+                </GradientStopCollection>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+
+
+        <Style x:Key="{x:Type ProgressBar}" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Grid MinHeight="14" MinWidth="200" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Determinate" />
+                                    <VisualState x:Name="Indeterminate">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Duration="00:00:00" Storyboard.TargetName="PART_Indicator" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <SolidColorBrush>Transparent</SolidColorBrush>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="PART_Track" CornerRadius="2" BorderThickness="1">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{DynamicResource ciemnaRamka}" />
+                                </Border.BorderBrush>
+                            </Border>
+                            <Border x:Name="PART_Indicator" CornerRadius="2" BorderThickness="1" HorizontalAlignment="Left" Background="{TemplateBinding Foreground}" Margin="0,-1,0,1">
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="{DynamicResource jasnaRamka}" Offset="0.0" />
+                                                <GradientStop Color="{DynamicResource ciemnaRamka}" Offset="1.0" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                                <Grid ClipToBounds="True" x:Name="Animation">
+                                    <Rectangle x:Name="PART_GlowRect" Width="100" HorizontalAlignment="Left" Fill="{DynamicResource wypelnienieLadowania}" Margin="-100,0,0,0" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="{DynamicResource bialy}" Offset="0" />
+                        <GradientStop Color="{DynamicResource jasny}" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="{DynamicResource jasny}" Offset="0" />
+                        <GradientStop Color="{DynamicResource ciemny}" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        
+        
+        <Style TargetType="{x:Type TabControl}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabControl}">
+                        <Grid KeyboardNavigation.TabNavigation="Local">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FFAAAAAA" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <TabPanel x:Name="HeaderPanel" Grid.Row="0" Panel.ZIndex="1" Margin="0,0,4,-1" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="Transparent" />
+                            <Border x:Name="Border" Grid.Row="1" BorderThickness="1" CornerRadius="2" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabIndex="2">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="{DynamicResource mJasnyRoz}" Offset="0" />
+                                        <GradientStop Color="{DynamicResource jasnyRoz}" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{DynamicResource ciemnaRamka}"/>
+                                </Border.BorderBrush>
+                                <ContentPresenter x:Name="PART_SelectedContentHost" Margin="4" ContentSource="SelectedContent" />
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Width">
+                <Setter.Value>
+                    <MultiBinding Converter="{StaticResource kontrolerZakladek}">
+                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}" />
+                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}" Path="ActualWidth" />
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid x:Name="Root">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="{StaticResource mCiemnyRoz}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderThickness)" Storyboard.TargetName="Border">
+                                                <EasingThicknessKeyFrame KeyTime="0" Value="1,1,1,0" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver" />
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="{StaticResource wylaczony}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="{StaticResource jasnaRamka}"/>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Border" Margin="0,0,-4,0" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{DynamicResource ciemnaRamka}" />
+                                </Border.BorderBrush>
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="{DynamicResource bialy}" Offset="0.0" />
+                                                <GradientStop Color="{DynamicResource jasnyRoz}" Offset="1.0" />
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2" RecognizesAccessKey="True" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Panel.ZIndex" Value="100" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

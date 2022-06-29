@@ -242,6 +242,11 @@ namespace Projekt
                 }
             }
         }
+        private void FormatDaty(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(DateTime)) (e.Column as DataGridBoundColumn).Binding.StringFormat = "dd/MM/yyyy";
+            if (e.PropertyName == "Email") e.Column.MinWidth = 154;
+        }
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);

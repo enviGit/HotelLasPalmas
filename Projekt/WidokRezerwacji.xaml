@@ -21,7 +21,7 @@
                         <Grid.Background>
                             <ImageBrush ImageSource="/Zasoby/tlo.jpg" Stretch="UniformToFill"/>
                         </Grid.Background>
-                        <DataGrid x:Name="tabelaGosci" RowHeaderWidth="0" ColumnWidth="Auto" ColumnHeaderHeight="30" Foreground="Black" Margin="135,79,135,167" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray" BorderThickness="3" BorderBrush="{x:Null}" HeadersVisibility="None" Width="606">
+                        <DataGrid x:Name="tabelaGosci" RowHeaderWidth="0" ColumnWidth="Auto" ColumnHeaderHeight="30" Foreground="Black" Margin="135,79,135,167" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray" BorderThickness="3" BorderBrush="{x:Null}" HeadersVisibility="None" Width="606" AutoGeneratingColumn="FormatDaty" SelectionChanged="TabelaGosci_SelectionChanged" CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single" IsReadOnly="True">
                             <DataGrid.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
                             </DataGrid.Resources>
@@ -88,17 +88,17 @@
                         <TextBox x:Name="Imie" TextWrapping="Wrap" Width="165" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="179,383,0,0" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
                         <TextBox x:Name="Nazwisko" TextWrapping="Wrap" Width="165" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="179,421,0,0" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
                         <TextBox x:Name="Telefon" TextWrapping="Wrap" Width="165" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="179,458,0,0" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
-                        <ComboBox x:Name="nrPietra" SelectedValuePath="Content" Width="74" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="685,383,0,0">
+                        <ComboBox x:Name="nrPietra" SelectedValuePath="Content" Width="74" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="685,383,0,0" SelectionChanged="Pietro_SelectionChanged">
                             <ComboBoxItem Content="0"/>
                             <ComboBoxItem Content="1"/>
                             <ComboBoxItem Content="2"/>
                         </ComboBox>
-                        <ComboBox x:Name="nrPokoju" Width="74" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="685,416,0,0"></ComboBox>
+                        <ComboBox x:Name="nrPokoju" Width="74" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="685,416,0,0" Visibility="Hidden"></ComboBox>
                         <Label Content="Imie" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="138,378,0,0" FontSize="14"/>
                         <Label Content="Nazwisko" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,417,0,0" FontSize="14"/>
                         <Label Content="Telefon" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,455,0,0" FontSize="14"/>
                         <Label Content="Piętro" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="638,378,0,0" FontSize="14"/>
-                        <Label x:Name="pokoj" Content="Pokój" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="641,413,0,0" FontSize="14"/>
+                        <Label x:Name="pokoj" Content="Pokój" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="641,413,0,0" FontSize="14" Visibility="Hidden"/>
                         <Label Content="Zameldowanie" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="391,378,0,0" FontSize="14"/>
                         <Label Content="Wymeldowanie" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,411,0,0" FontSize="14"/>
                         <Button Content="Usuń rezerwację" Width="150" Height="35" FontSize="16" Margin="650,459,77,37"/>
@@ -124,7 +124,7 @@
                                 </LinearGradientBrush>
                             </Label.Foreground>
                         </Label>
-                        <DataGrid x:Name="tabelaPokoi" RowHeaderWidth="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" ColumnWidth="Auto" ColumnHeaderHeight="30" Foreground="Black" FontSize="16" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray" BorderThickness="3" Margin="308,96,308,97" BorderBrush="{x:Null}" HeadersVisibility="None" Width="261">
+                        <DataGrid x:Name="tabelaPokoi" RowHeaderWidth="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" ColumnWidth="Auto" ColumnHeaderHeight="30" Foreground="Black" FontSize="16" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray" BorderThickness="3" Margin="308,96,308,97" BorderBrush="{x:Null}" HeadersVisibility="None" Width="261" SelectionChanged="TabelaGosci_SelectionChanged" CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single" IsReadOnly="True">
                             <DataGrid.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
                             </DataGrid.Resources>
