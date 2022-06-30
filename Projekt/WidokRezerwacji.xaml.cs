@@ -118,6 +118,120 @@ namespace Projekt
                 stan.Content = "Zatrzymano!";
             }
         }
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult potwierdzenie = MessageBox.Show("Czy na pewno chcesz edytować dane gościa?", "Potwierdź edycję!", MessageBoxButton.YesNo);
+
+            if (potwierdzenie == MessageBoxResult.Yes)
+            {
+                HotelEntities db = new HotelEntities();
+
+                var wynikGosc = from gosc in db.Gosc
+                                join pobyt in db.Pobyt on gosc.ID equals pobyt.GoscID
+                                where gosc.ID == pobyt.GoscID && pobyt.ID == ID
+                                select gosc;
+                Gosc obiektGosc = wynikGosc.SingleOrDefault();
+                if (obiektGosc != null)
+                {
+                    obiektGosc.Imie = Imie.Text;
+                    obiektGosc.Nazwisko = Nazwisko.Text;
+                    obiektGosc.Telefon = Telefon.Text;
+                }
+                db.SaveChanges();
+
+                var wynikRezerwacja = from rezerwacja in db.Rezerwacja
+                                      join pokoj in db.Pokoj on rezerwacja.PokojID equals pokoj.ID
+                                      join pobyt in db.Pobyt on rezerwacja.ID equals pobyt.RezerwacjaID
+                                      where pobyt.ID == ID
+                                      select rezerwacja;
+                Rezerwacja obiektRezerwacja = wynikRezerwacja.SingleOrDefault();
+                if (obiektRezerwacja != null)
+                {
+                    obiektRezerwacja.DataZameldowania = (DateTime)zameldowanie.SelectedDate;
+                    obiektRezerwacja.DataWymeldowania = (DateTime)wymeldowanie.SelectedDate;
+
+                    switch ((string)nrPietra.SelectedValue)
+                    {
+                        case "0" when (string)nrPokoju.SelectedValue == "001":
+                            obiektRezerwacja.PokojID = 1;
+                            break;
+                        case "0" when (string)nrPokoju.SelectedValue == "002":
+                            obiektRezerwacja.PokojID = 2;
+                            break;
+                        case "1" when (string)nrPokoju.SelectedValue == "101":
+                            obiektRezerwacja.PokojID = 3;
+                            break;
+                        case "1" when (string)nrPokoju.SelectedValue == "102":
+                            obiektRezerwacja.PokojID = 4;
+                            break;
+                        case "1" when (string)nrPokoju.SelectedValue == "103":
+                            obiektRezerwacja.PokojID = 5;
+                            break;
+                        case "1" when (string)nrPokoju.SelectedValue == "104":
+                            obiektRezerwacja.PokojID = 6;
+                            break;
+                        case "2" when (string)nrPokoju.SelectedValue == "201":
+                            obiektRezerwacja.PokojID = 7;
+                            break;
+                        case "2" when (string)nrPokoju.SelectedValue == "202":
+                            obiektRezerwacja.PokojID = 8;
+                            break;
+                        case "2" when (string)nrPokoju.SelectedValue == "203":
+                            obiektRezerwacja.PokojID = 9;
+                            break;
+                        case "2" when (string)nrPokoju.SelectedValue == "204":
+                            obiektRezerwacja.PokojID = 10;
+                            break;
+                    }
+                }
+                db.SaveChanges();
+
+                Button_Click_1(null, null);
+            }
+        }
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult potwierdzenie = MessageBox.Show("Czy na pewno chcesz usunąć dane gościa?", "Potwierdź usunięcie!", MessageBoxButton.YesNo);
+
+            if (potwierdzenie == MessageBoxResult.Yes)
+            {
+                HotelEntities db = new HotelEntities();
+                WidokRezerwacji pokazDane = tabelaGosci.SelectedItem as WidokRezerwacji;
+
+                var wynikPobyt = from pobyt in db.Pobyt
+                                 where pobyt.ID == ID
+                                 select pobyt;
+                Pobyt obiektPobyt = wynikPobyt.SingleOrDefault();
+
+                var wynikRezerwacja = from rezerwacja in db.Rezerwacja
+                                      join pobyt in db.Pobyt on rezerwacja.ID equals pobyt.RezerwacjaID
+                                      where pobyt.ID == ID && rezerwacja.ID == pobyt.RezerwacjaID
+                                      select rezerwacja;
+                Rezerwacja obiektRezerwacja = wynikRezerwacja.SingleOrDefault();
+
+                if (pokazDane != null)
+                {
+                    IList<WidokRezerwacji> dane = tabelaGosci.ItemsSource as IList<WidokRezerwacji>;
+
+                    if (dane != null && obiektPobyt.ID > 10)
+                    {
+                        db.Pobyt.Remove(obiektPobyt);
+                        db.Rezerwacja.Remove(obiektRezerwacja);
+                        db.SaveChanges();
+                        dane.Remove(pokazDane);
+                    }
+                    else if (dane != null && obiektPobyt.ID <= 10)
+                    {
+                        db.Pobyt.Remove(obiektPobyt);
+                        db.SaveChanges();
+                        dane.Remove(pokazDane);
+                    }
+
+                    tabelaGosci.ItemsSource = null;
+                    tabelaGosci.ItemsSource = dane;
+                }
+            }
+        }
         public void Button_Click_4(object sender, RoutedEventArgs e)
         {
             if (!bgWorker.IsBusy)

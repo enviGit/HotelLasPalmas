@@ -82,7 +82,7 @@
                             </Label.Foreground>
                         </Label>
                         <Button Content="Dokonaj rezerwacji" Height="35" FontSize="16" Click="Button_Click" HorizontalContentAlignment="Center" Width="150" Margin="650,27,77,469"/>
-                        <Button x:Name="edytuj" Content="Edytuj dane" Width="150" Height="35" FontSize="16" Margin="438,459,289,37"/>
+                        <Button x:Name="edytuj" Content="Edytuj dane" Width="150" Height="35" FontSize="16" Margin="438,459,289,37" Click="Button_Click_2"/>
                         <DatePicker x:Name="zameldowanie" FirstDayOfWeek="Monday" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="496,381,0,0" BorderBrush="{x:Null}" Height="26"/>
                         <DatePicker x:Name="wymeldowanie" FirstDayOfWeek="Monday" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="496,414,0,0" BorderBrush="{x:Null}" Height="26"/>
                         <TextBox x:Name="Imie" TextWrapping="Wrap" Width="165" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="179,383,0,0" Background="{x:Null}" BorderThickness="0, 0, 0, 3" TextAlignment="Center" BorderBrush="DeepPink" Foreground="White" CaretBrush="White"/>
@@ -101,7 +101,7 @@
                         <Label x:Name="pokoj" Content="Pokój" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="641,413,0,0" FontSize="14" Visibility="Hidden"/>
                         <Label Content="Zameldowanie" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="391,378,0,0" FontSize="14"/>
                         <Label Content="Wymeldowanie" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,411,0,0" FontSize="14"/>
-                        <Button Content="Usuń rezerwację" Width="150" Height="35" FontSize="16" Margin="650,459,77,37"/>
+                        <Button Content="Usuń rezerwację" Width="150" Height="35" FontSize="16" Margin="650,459,77,37" Click="Button_Click_3"/>
                     </Grid>
                     <Button x:Name="wczytywanie" Content="Wczytaj rezerwacje" Height="35" FontSize="16" Click="Button_Click_1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="438,27,289,469" Width="150"/>
                     <ProgressBar x:Name="ladowanie" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="292" Visibility="Hidden"/>
