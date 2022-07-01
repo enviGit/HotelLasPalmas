@@ -22,6 +22,7 @@ namespace Projekt
     {
         BackgroundWorker bgWorker = new BackgroundWorker();
         private int ID = 0;
+        private int walidacjaLicznik = 0;
 
         public MainWindow()
         {
@@ -120,73 +121,83 @@ namespace Projekt
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult potwierdzenie = MessageBox.Show("Czy na pewno chcesz edytować dane gościa?", "Potwierdź edycję!", MessageBoxButton.YesNo);
+            SprawdzWalidacje();
 
-            if (potwierdzenie == MessageBoxResult.Yes)
+            if (walidacjaLicznik != 2)
             {
-                HotelEntities db = new HotelEntities();
+                walidacjaLicznik = 0;
+                return;
+            }
+            else
+            {
+                MessageBoxResult potwierdzenie = MessageBox.Show("Czy na pewno chcesz edytować dane gościa?", "Potwierdź edycję!", MessageBoxButton.YesNo);
 
-                var wynikGosc = from gosc in db.Gosc
-                                join pobyt in db.Pobyt on gosc.ID equals pobyt.GoscID
-                                where gosc.ID == pobyt.GoscID && pobyt.ID == ID
-                                select gosc;
-                Gosc obiektGosc = wynikGosc.SingleOrDefault();
-                if (obiektGosc != null)
+                if (potwierdzenie == MessageBoxResult.Yes)
                 {
-                    obiektGosc.Imie = Imie.Text;
-                    obiektGosc.Nazwisko = Nazwisko.Text;
-                    obiektGosc.Telefon = Telefon.Text;
-                }
-                db.SaveChanges();
+                    HotelEntities db = new HotelEntities();
 
-                var wynikRezerwacja = from rezerwacja in db.Rezerwacja
-                                      join pokoj in db.Pokoj on rezerwacja.PokojID equals pokoj.ID
-                                      join pobyt in db.Pobyt on rezerwacja.ID equals pobyt.RezerwacjaID
-                                      where pobyt.ID == ID
-                                      select rezerwacja;
-                Rezerwacja obiektRezerwacja = wynikRezerwacja.SingleOrDefault();
-                if (obiektRezerwacja != null)
-                {
-                    obiektRezerwacja.DataZameldowania = (DateTime)zameldowanie.SelectedDate;
-                    obiektRezerwacja.DataWymeldowania = (DateTime)wymeldowanie.SelectedDate;
-
-                    switch ((string)nrPietra.SelectedValue)
+                    var wynikGosc = from gosc in db.Gosc
+                                    join pobyt in db.Pobyt on gosc.ID equals pobyt.GoscID
+                                    where gosc.ID == pobyt.GoscID && pobyt.ID == ID
+                                    select gosc;
+                    Gosc obiektGosc = wynikGosc.SingleOrDefault();
+                    if (obiektGosc != null)
                     {
-                        case "0" when (string)nrPokoju.SelectedValue == "001":
-                            obiektRezerwacja.PokojID = 1;
-                            break;
-                        case "0" when (string)nrPokoju.SelectedValue == "002":
-                            obiektRezerwacja.PokojID = 2;
-                            break;
-                        case "1" when (string)nrPokoju.SelectedValue == "101":
-                            obiektRezerwacja.PokojID = 3;
-                            break;
-                        case "1" when (string)nrPokoju.SelectedValue == "102":
-                            obiektRezerwacja.PokojID = 4;
-                            break;
-                        case "1" when (string)nrPokoju.SelectedValue == "103":
-                            obiektRezerwacja.PokojID = 5;
-                            break;
-                        case "1" when (string)nrPokoju.SelectedValue == "104":
-                            obiektRezerwacja.PokojID = 6;
-                            break;
-                        case "2" when (string)nrPokoju.SelectedValue == "201":
-                            obiektRezerwacja.PokojID = 7;
-                            break;
-                        case "2" when (string)nrPokoju.SelectedValue == "202":
-                            obiektRezerwacja.PokojID = 8;
-                            break;
-                        case "2" when (string)nrPokoju.SelectedValue == "203":
-                            obiektRezerwacja.PokojID = 9;
-                            break;
-                        case "2" when (string)nrPokoju.SelectedValue == "204":
-                            obiektRezerwacja.PokojID = 10;
-                            break;
+                        obiektGosc.Imie = Imie.Text;
+                        obiektGosc.Nazwisko = Nazwisko.Text;
+                        obiektGosc.Telefon = Telefon.Text;
                     }
-                }
-                db.SaveChanges();
+                    db.SaveChanges();
 
-                Button_Click_1(null, null);
+                    var wynikRezerwacja = from rezerwacja in db.Rezerwacja
+                                          join pokoj in db.Pokoj on rezerwacja.PokojID equals pokoj.ID
+                                          join pobyt in db.Pobyt on rezerwacja.ID equals pobyt.RezerwacjaID
+                                          where pobyt.ID == ID
+                                          select rezerwacja;
+                    Rezerwacja obiektRezerwacja = wynikRezerwacja.SingleOrDefault();
+                    if (obiektRezerwacja != null)
+                    {
+                        obiektRezerwacja.DataZameldowania = (DateTime)zameldowanie.SelectedDate;
+                        obiektRezerwacja.DataWymeldowania = (DateTime)wymeldowanie.SelectedDate;
+
+                        switch ((string)nrPietra.SelectedValue)
+                        {
+                            case "0" when (string)nrPokoju.SelectedValue == "001":
+                                obiektRezerwacja.PokojID = 1;
+                                break;
+                            case "0" when (string)nrPokoju.SelectedValue == "002":
+                                obiektRezerwacja.PokojID = 2;
+                                break;
+                            case "1" when (string)nrPokoju.SelectedValue == "101":
+                                obiektRezerwacja.PokojID = 3;
+                                break;
+                            case "1" when (string)nrPokoju.SelectedValue == "102":
+                                obiektRezerwacja.PokojID = 4;
+                                break;
+                            case "1" when (string)nrPokoju.SelectedValue == "103":
+                                obiektRezerwacja.PokojID = 5;
+                                break;
+                            case "1" when (string)nrPokoju.SelectedValue == "104":
+                                obiektRezerwacja.PokojID = 6;
+                                break;
+                            case "2" when (string)nrPokoju.SelectedValue == "201":
+                                obiektRezerwacja.PokojID = 7;
+                                break;
+                            case "2" when (string)nrPokoju.SelectedValue == "202":
+                                obiektRezerwacja.PokojID = 8;
+                                break;
+                            case "2" when (string)nrPokoju.SelectedValue == "203":
+                                obiektRezerwacja.PokojID = 9;
+                                break;
+                            case "2" when (string)nrPokoju.SelectedValue == "204":
+                                obiektRezerwacja.PokojID = 10;
+                                break;
+                        }
+                    }
+                    db.SaveChanges();
+
+                    Button_Click_1(null, null);
+                }
             }
         }
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -247,6 +258,39 @@ namespace Projekt
                 stan2.Content = "Zatrzymano!";
             }
         }
+        private void SprawdzWalidacje()
+        {
+            SprawdzGoscia(Imie, Nazwisko);
+            SprawdzTelefon(Telefon);
+        }
+        private void SprawdzGoscia(TextBox poleImie, TextBox poleNazwisko)
+        {
+            if (!Regex.Match(poleImie.Text + poleNazwisko.Text, "^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\\]]{2,}$").Success)
+            {
+                MessageBox.Show("Pole \"" + poleImie.Name + "\" lub pole \"" + poleNazwisko.Name + "\" musi zostać poprawione!", "Nieprawidłowe dane gościa!");
+
+                poleImie.BorderBrush = Brushes.Red;
+                poleImie.BorderThickness = new Thickness(8, 0, 0, 0);
+                poleImie.Padding = new Thickness(5);
+                poleNazwisko.BorderBrush = Brushes.Red;
+                poleNazwisko.BorderThickness = new Thickness(8, 0, 0, 0);
+                poleNazwisko.Padding = new Thickness(5);
+            }
+            else walidacjaLicznik++;
+        }
+        private void SprawdzTelefon(TextBox poleTelefon)
+        {
+            if (!Regex.Match(poleTelefon.Text, "^[+]?[0-9 ]+$").Success)
+            {
+                MessageBox.Show("Pole \"" + poleTelefon.Name + "\" musi zostać poprawione!", "Niepoprawny Telefon!");
+
+                poleTelefon.BorderBrush = Brushes.Red;
+                poleTelefon.BorderThickness = new Thickness(8, 0, 0, 0);
+                poleTelefon.Padding = new Thickness(5);
+            }
+            else walidacjaLicznik++;
+        }
+
         private void SchowajLadowanie()
         {
             Dispatcher.Invoke((Action)(() =>
