@@ -21,6 +21,7 @@ namespace Projekt
     public partial class MainWindow : Window
     {
         BackgroundWorker bgWorker = new BackgroundWorker();
+        KontrolerMuzyki kM = new KontrolerMuzyki();
         private int ID = 0;
         private int walidacjaLicznik = 0;
 
@@ -28,6 +29,7 @@ namespace Projekt
         {
             InitializeComponent();
 
+            kM.OdtworzMuzyke();
             SchowajLadowanie();
             bgWorker.DoWork += BgWorker_wykonaj;
             bgWorker.ProgressChanged += BgWorker_zmianaProgresu;
