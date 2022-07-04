@@ -155,6 +155,7 @@ namespace Projekt
                         MainWindow widokRezerwacji = new MainWindow();
                         widokRezerwacji.Show();
                         Hide();
+                        widokRezerwacji.Button_Click_1(null, null);
                     }
                 }
             }

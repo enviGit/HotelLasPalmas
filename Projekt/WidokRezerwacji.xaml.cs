@@ -29,6 +29,8 @@ namespace Projekt
         {
             InitializeComponent();
 
+            edytuj.IsEnabled = false;
+            usun.IsEnabled = false;
             kM.OdtworzMuzyke();
             SchowajLadowanie();
             bgWorker.DoWork += BgWorker_wykonaj;
@@ -106,7 +108,7 @@ namespace Projekt
             dodajRezerwacje.Show();
             Hide();
         }
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        public void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if (!bgWorker.IsBusy)
             {

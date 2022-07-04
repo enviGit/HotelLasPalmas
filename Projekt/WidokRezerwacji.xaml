@@ -101,7 +101,7 @@
                         <Label x:Name="pokoj" Content="Pokój" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="641,413,0,0" FontSize="14" Visibility="Hidden"/>
                         <Label Content="Zameldowanie" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="391,378,0,0" FontSize="14"/>
                         <Label Content="Wymeldowanie" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,411,0,0" FontSize="14"/>
-                        <Button Content="Usuń rezerwację" Width="150" Height="35" FontSize="16" Margin="650,459,77,37" Click="Button_Click_3"/>
+                        <Button x:Name="usun" Content="Usuń rezerwację" Width="150" Height="35" FontSize="16" Margin="650,459,77,37" Click="Button_Click_3"/>
                     </Grid>
                     <Button x:Name="wczytywanie" Content="Wczytaj rezerwacje" Height="35" FontSize="16" Click="Button_Click_1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="438,27,289,469" Width="150"/>
                     <ProgressBar x:Name="ladowanie" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="292" Visibility="Hidden"/>
@@ -178,7 +178,7 @@
                         </DataGrid>
                         <Button Content="Dokonaj rezerwacji" FontSize="16" Click="Button_Click" Width="150" Margin="547,28,180,468" Height="35"/>
                     </Grid>
-                    <Button x:Name="wczytywanie2" Content="Wczytaj wolne pokoje" FontSize="16" Click="Button_Click_4" Width="170" Margin="354,466,353,25" Height="40"/>
+                    <Button x:Name="wczytywanie2" Content="Wczytaj wolne pokoje" FontSize="16" Click="Button_Click_4" Width="170" Margin="354,443,353,48" Height="40"/>
                     <ProgressBar x:Name="ladowanie2" HorizontalAlignment="Center" Height="32" VerticalAlignment="Center" Width="292" Visibility="Hidden"/>
                     <Label x:Name="stan2" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Width="292" HorizontalContentAlignment="Center" Foreground="White"/>
                 </Grid>
