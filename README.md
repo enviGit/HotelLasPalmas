@@ -25,7 +25,7 @@ Projekt zakładający użycie następujących technologii i narzędzi:
 
 ## Status projektu
 
-Ukończony
+Zakończony
 
 ## Autor
 
