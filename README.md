@@ -1,6 +1,6 @@
 # HotelLasPalmas
 
-Projekt rezerwacji pokoju hotelowego w ramach przedmiotu Programowanie obiektowe w oparciu o język C# oraz SQL.
+Aplikacja rezerwacji pokoju hotelowego w oparciu o wizualizację WPF, język C# oraz SQL.
 
 ## Opis
 
