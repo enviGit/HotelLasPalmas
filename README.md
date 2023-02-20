@@ -1,4 +1,4 @@
-# HotelLasPalmas
+# Hotel Las Palmas
 
 Aplikacja rezerwacji pokoju hotelowego w oparciu o wizualizację WPF, język C# oraz SQL.
 
@@ -27,9 +27,9 @@ Projekt zakładający użycie następujących technologii i narzędzi:
 
 Zakończony
 
-## Autor
+## Licencja
 
-Paweł Trojański
+Projekt objęty licencją MIT. Więcej informacji znajduje sie w pliku [LICENSE](LICENSE.md).
 
 ## Źródła
 
